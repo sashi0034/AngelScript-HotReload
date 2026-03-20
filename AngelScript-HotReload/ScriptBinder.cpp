@@ -73,6 +73,7 @@ namespace MyProject
 
         asbind20::ref_class<FighterRef>(engine, "FighterRef")
             .default_factory()
+            .factory<Fighter>("Fighter fighter")
             .addref(&FighterRef::addRef)
             .release(&FighterRef::release);
     }

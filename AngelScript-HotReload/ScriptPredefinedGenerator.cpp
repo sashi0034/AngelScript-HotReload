@@ -57,6 +57,11 @@ namespace
             }
 
             stream << "{\n";
+            for (int j = 0; j < t->GetFactoryCount(); ++j)
+            {
+                const auto m = t->GetFactoryByIndex(j);
+                stream << std::format("\t{};\n", m->GetDeclaration(false, true, true));
+            }
             for (int j = 0; j < t->GetBehaviourCount(); ++j)
             {
                 asEBehaviours behaviours;

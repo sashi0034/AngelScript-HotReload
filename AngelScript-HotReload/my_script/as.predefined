@@ -44,6 +44,9 @@ class string{
 	int regexFind(const string&in regex, uint start = 0, uint&out lengthOfMatch = void) const;
 }
 class array<T>{
+	T[]@ array(int&in);
+	T[]@ array(int&in, uint length);
+	T[]@ array(int&in, uint length, const T&in value);
 	T& opIndex(uint index);
 	const T& opIndex(uint index) const;
 	uint opForBegin() const;
@@ -84,6 +87,8 @@ class Fighter{
 	int life;
 }
 class FighterRef{
+	FighterRef@ FighterRef();
+	FighterRef@ FighterRef(Fighter fighter);
 }
 uint scan(const string&in str, ?&out...);
 string format(const string&in fmt, const ?&in...);
