@@ -58,7 +58,7 @@ namespace MyProject
         RegisterScriptArray(engine, true);
 
         // -----------------------------------------------
-        // asbind20 を使用して型や関数を登録する
+        using namespace asbind20;
 
         asbind20::global(engine)
             .message_callback(&MessageCallback)
@@ -75,6 +75,8 @@ namespace MyProject
             .default_factory()
             .factory<Fighter>("Fighter fighter")
             .addref(&FighterRef::addRef)
-            .release(&FighterRef::release);
+            .release(&FighterRef::release)
+            .method("Fighter& get()", overload_cast<>(&FighterRef::get))
+            .method("const Fighter& get() const", overload_cast<>(&FighterRef::get, const_));
     }
 }

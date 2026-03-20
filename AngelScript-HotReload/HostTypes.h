@@ -33,6 +33,16 @@ namespace MyProject
             }
         }
 
+        Fighter& get()
+        {
+            return m_fighter;
+        }
+
+        const Fighter& get() const
+        {
+            return m_fighter;
+        }
+
     private:
         int m_refCount{1};
         Fighter m_fighter{};
