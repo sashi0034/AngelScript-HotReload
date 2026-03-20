@@ -131,7 +131,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HostTypes.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ScriptBinder.cpp" />
+    <ClCompile Include="ScriptPredefinedGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\angelscript-addon\angelscript-addon.vcxproj">
@@ -143,6 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="my_script\my_script.as" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HostTypes.h" />
+    <ClInclude Include="ScriptBinder.h" />
+    <ClInclude Include="ScriptPredefinedGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
