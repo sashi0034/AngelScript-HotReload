@@ -8,6 +8,7 @@
 #include <string>
 
 #include "HostTypes.h"
+#include "RefWrapper.h"
 #include "add_on/scriptarray/scriptarray.h"
 #include "add_on/scriptstdstring/scriptstdstring.h"
 #include "asbind20/bind/class.hpp"
@@ -71,12 +72,12 @@ namespace MyProject
             .property("string name", &Fighter::name)
             .property("int life", &Fighter::life);
 
-        asbind20::ref_class<FighterRef>(engine, "FighterRef")
+        asbind20::ref_class<RefWrapper<Fighter>>(engine, "FighterRef")
             .default_factory()
             .factory<Fighter>("Fighter fighter")
-            .addref(&FighterRef::addRef)
-            .release(&FighterRef::release)
-            .method("Fighter& get()", overload_cast<>(&FighterRef::get))
-            .method("const Fighter& get() const", overload_cast<>(&FighterRef::get, const_));
+            .addref(&RefWrapper<Fighter>::addRef)
+            .release(&RefWrapper<Fighter>::release)
+            .method("Fighter& get()", overload_cast<>(&RefWrapper<Fighter>::get))
+            .method("const Fighter& get() const", overload_cast<>(&RefWrapper<Fighter>::get, const_));
     }
 }

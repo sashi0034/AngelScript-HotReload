@@ -149,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HostTypes.h" />
+    <ClInclude Include="RefWrapper.h" />
     <ClInclude Include="ScriptBinder.h" />
     <ClInclude Include="ScriptPredefinedGenerator.h" />
   </ItemGroup>

@@ -14,6 +14,8 @@ int tick_frame() {
     println(ctx.fighter[0].get().name);
 
     println("random value: " + rand(123));
+
     return 123;
 }
 
+// AngelScript のハンドル @ は、ポインタと言うより後から取っ付け可能な参照渡しと考えるといいかも
