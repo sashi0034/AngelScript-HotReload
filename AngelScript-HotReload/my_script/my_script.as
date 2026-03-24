@@ -1,4 +1,3 @@
-
 class Team {
     FighterRef leader;
     Team@ target;
@@ -15,22 +14,24 @@ int tick_frame() {
         Team team;
 
         team.leader.data().name = "Initial Leader";
-        team.leader.data().life = 100;
+        team.leader.data().life = 99;
 
         @team.target = Team();
-        team.target.leader.data().name = "Initial Leader";
+        team.target.leader.data().name = "Initial TGT";
         team.target.leader.data().life = 100;
 
         g_ctx.teams.insertLast(team);
     } else {
-
         g_ctx.teams[0].leader.data().life -= 1;
         g_ctx.teams[0].target.leader.data().life -= 2;
     }
 
     for (uint i = 0; i < g_ctx.teams.length(); i++) {
-        auto@ team = g_ctx.teams[i].leader;
-        println("[" + i +"] " + team.data().name + ": " + team.data().life);
+        auto@ leader = g_ctx.teams[i].leader;
+        println("[" + i + "] " + leader.data().name + ": " + leader.data().life);
+
+        auto@ targetLeader = g_ctx.teams[i].target.leader;
+        println("- TGT: " + targetLeader.data().name + ": " + targetLeader.data().life);
     }
 
     return 123;

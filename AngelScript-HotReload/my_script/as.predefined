@@ -89,6 +89,8 @@ class Fighter{
 class FighterRef{
 	FighterRef@ FighterRef();
 	FighterRef@ FighterRef(Fighter fighter);
+	FighterRef& opAssign(const FighterRef&in);
+	int refCount() const;
 	Fighter& data();
 	const Fighter& data() const;
 }

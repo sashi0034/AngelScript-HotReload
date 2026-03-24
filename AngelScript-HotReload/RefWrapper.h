@@ -12,6 +12,16 @@ namespace MyProject
         {
         }
 
+        RefWrapper& operator=(const RefWrapper& other)
+        {
+            if (this != &other)
+            {
+                m_data = other.m_data;
+            }
+
+            return *this;
+        }
+
         void addRef()
         {
             ++m_refCount;
@@ -23,6 +33,11 @@ namespace MyProject
             {
                 delete this;
             }
+        }
+
+        int refCount() const
+        {
+            return m_refCount;
         }
 
         DataType& data()

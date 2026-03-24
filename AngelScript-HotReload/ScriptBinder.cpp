@@ -75,8 +75,10 @@ namespace MyProject
         asbind20::ref_class<RefWrapper<Fighter>>(engine, "FighterRef")
             .default_factory()
             .factory<Fighter>("Fighter fighter")
+            .opAssign()
             .addref(&RefWrapper<Fighter>::addRef)
             .release(&RefWrapper<Fighter>::release)
+            .method("int refCount() const", &RefWrapper<Fighter>::refCount)
             .method("Fighter& data()", overload_cast<>(&RefWrapper<Fighter>::data))
             .method("const Fighter& data() const", overload_cast<>(&RefWrapper<Fighter>::data, const_));
     }

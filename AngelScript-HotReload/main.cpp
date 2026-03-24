@@ -49,7 +49,7 @@ int main()
             waitForFileChange(moduleName);
         }
 
-        std::cout << "--- step " << step << " ---" << std::endl;
+        std::cout << "=== step " << step << " ===" << std::endl;
 
         int r;
         r = builder.StartNewModule(engine, moduleName.c_str());
