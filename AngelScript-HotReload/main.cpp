@@ -41,7 +41,7 @@ int main()
     MyProject::GenerateScriptPredefined(engine, "my_script/as.predefined");
 
     CSerializer moduleSerializer{};
-    // MyProject::RegisterScriptSerializer(moduleSerializer);
+    MyProject::RegisterScriptSerializer(moduleSerializer);
 
     bool canReload{};
 
@@ -97,6 +97,7 @@ int main()
         {
             std::cout << "C++: result: " << result.value() << std::endl;
 
+            moduleSerializer.Clear();
             moduleSerializer.Store(module);
             canReload = true;
         }
