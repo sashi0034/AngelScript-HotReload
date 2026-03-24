@@ -25,12 +25,12 @@ namespace MyProject
             }
         }
 
-        DataType& get()
+        DataType& data()
         {
             return m_data;
         }
 
-        const DataType& get() const
+        const DataType& data() const
         {
             return m_data;
         }

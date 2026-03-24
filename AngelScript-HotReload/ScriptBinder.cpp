@@ -77,7 +77,7 @@ namespace MyProject
             .factory<Fighter>("Fighter fighter")
             .addref(&RefWrapper<Fighter>::addRef)
             .release(&RefWrapper<Fighter>::release)
-            .method("Fighter& get()", overload_cast<>(&RefWrapper<Fighter>::get))
-            .method("const Fighter& get() const", overload_cast<>(&RefWrapper<Fighter>::get, const_));
+            .method("Fighter& data()", overload_cast<>(&RefWrapper<Fighter>::data))
+            .method("const Fighter& data() const", overload_cast<>(&RefWrapper<Fighter>::data, const_));
     }
 }
