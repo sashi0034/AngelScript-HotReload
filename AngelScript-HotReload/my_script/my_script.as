@@ -4,6 +4,7 @@ class Team {
 }
 
 class Context {
+    int reloadCount = 123;
     Team[] teams;
 }
 
@@ -22,7 +23,9 @@ int tick_frame() {
 
         g_ctx.teams.insertLast(team);
     } else {
+        g_ctx.reloadCount++;
         g_ctx.teams[0].leader.data().life -= 1;
+
         g_ctx.teams[0].target.leader.data().life -= 2;
     }
 
@@ -34,7 +37,7 @@ int tick_frame() {
         println("- TGT: " + targetLeader.data().name + ": " + targetLeader.data().life);
     }
 
-    return 123;
+    return g_ctx.reloadCount;
 }
 
 // AngelScript のハンドル @ は、ポインタと言うより後から取っ付け可能な参照渡しと考えるといいかも

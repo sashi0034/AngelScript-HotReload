@@ -4,9 +4,11 @@
 
 #include "ScriptBinder.h"
 #include "ScriptPredefinedGenerator.h"
+#include "ScriptSerializer.h"
 #include "add_on/scriptstdstring/scriptstdstring.h"
 #include "add_on/datetime/datetime.h"
 #include "add_on/scriptbuilder/scriptbuilder.h"
+#include "add_on/serializer/serializer.h"
 #include "asbind20/bind.hpp"
 #include "asbind20/invoke.hpp"
 
@@ -37,6 +39,11 @@ int main()
     MyProject::BindScript(engine);
 
     MyProject::GenerateScriptPredefined(engine, "my_script/as.predefined");
+
+    CSerializer moduleSerializer{};
+    // MyProject::RegisterScriptSerializer(moduleSerializer);
+
+    bool canReload{};
 
     for (int step = 0; ; ++step)
     {
@@ -70,6 +77,11 @@ int main()
             continue;
         }
 
+        if (canReload)
+        {
+            moduleSerializer.Restore(engine->GetModule(moduleName.c_str()));
+        }
+
         asIScriptModule* module = engine->GetModule(moduleName.c_str());
         assert(module != nullptr);
 
@@ -84,6 +96,9 @@ int main()
         if (result.has_value())
         {
             std::cout << "C++: result: " << result.value() << std::endl;
+
+            moduleSerializer.Store(module);
+            canReload = true;
         }
         else
         {

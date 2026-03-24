@@ -135,6 +135,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ScriptBinder.cpp" />
     <ClCompile Include="ScriptPredefinedGenerator.cpp" />
+    <ClCompile Include="ScriptSerializer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\angelscript-addon\angelscript-addon.vcxproj">
@@ -152,6 +153,7 @@
     <ClInclude Include="RefWrapper.h" />
     <ClInclude Include="ScriptBinder.h" />
     <ClInclude Include="ScriptPredefinedGenerator.h" />
+    <ClInclude Include="ScriptSerializer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
