@@ -2,7 +2,7 @@
 
 AngelScript の標準アドオン CSerializer を利用して、スクリプトのホットリロードを実装するサンプルです。
 
-- [./AngelScript-HotReload\my_script\my_script.as](./AngelScript-HotReload\my_script\my_script.as) を変更すると、自動でホットリロードされます。
+- [./AngelScript-HotReload/my_script/my_script.as](./AngelScript-HotReload/my_script/my_script.as) を変更すると、自動でホットリロードされます。
 
 - グローバル変数や C++ 側で保持しているオブジェクトを一旦メモリ上へシリアライズを行い、スクリプトの再コンパイル後にデシリアライズして状態を復元することで実現するようです。
 
