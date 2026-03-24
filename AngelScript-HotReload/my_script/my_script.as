@@ -3,16 +3,23 @@ class Team {
     Team@ target;
 }
 
-class Context {
-    int reloadCount = 123;
-    Team[] teams;
+class TeamEx : Team {
+    int d;
 }
 
+class Context {
+    int reloadCount = 0;
+    Team@[] teams;
+}
+
+int g_d = 696;
 Context g_ctx;
 
 int tick_frame() {
+    // 超適当な謎の疑似戦闘
     if (g_ctx.teams.length() == 0) {
-        Team team;
+        TeamEx team;
+        team.d = g_d;
 
         team.leader.data().name = "Initial Leader";
         team.leader.data().life = 99;
@@ -27,6 +34,28 @@ int tick_frame() {
         g_ctx.teams[0].leader.data().life -= 1;
 
         g_ctx.teams[0].target.leader.data().life -= 2;
+
+        Team t;
+        t.leader.data().life = 50;
+        t.leader.data().name = "Fighter [" + g_ctx.reloadCount + "]";
+
+        @t.target = g_ctx.teams[0];
+
+        g_ctx.teams.insertAt(0, t);
+    }
+
+    if (g_ctx.teams.length() >= 3) {
+        TeamEx t;
+        t.leader.data().life = 50;
+        t.leader.data().name = "Fighter [" + g_ctx.reloadCount + "]";
+
+        @t.target = g_ctx.teams[0];
+        g_d++;
+        t.d = g_d;
+
+        g_ctx.teams.insertAt(0, t);
+
+        g_ctx.teams.removeRange(1, g_ctx.teams.length() - 1);
     }
 
     for (uint i = 0; i < g_ctx.teams.length(); i++) {
@@ -35,6 +64,14 @@ int tick_frame() {
 
         auto@ targetLeader = g_ctx.teams[i].target.leader;
         println("- TGT: " + targetLeader.data().name + ": " + targetLeader.data().life);
+
+        TeamEx@ teamEx = cast<TeamEx>(g_ctx.teams[i]);
+        if (teamEx !is null) {
+            println(" - d: " + teamEx.d);
+            teamEx.d++;
+        } else {
+            println(" - d: n/a");
+        }
     }
 
     return g_ctx.reloadCount;
