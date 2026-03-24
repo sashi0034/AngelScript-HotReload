@@ -114,41 +114,48 @@ namespace
         }
     };
 
-    // Serializer for the 'FighterRef' reference class
-    class Serializer_FighterRef : public CUserType
+    template <class T>
+    class Serializer_RefWrapper : public CUserType
     {
     public:
+        Serializer_RefWrapper(std::string typeDecl) : m_typeDecl(std::move(typeDecl))
+        {
+        }
+
         void* AllocateUnitializedMemory(CSerializedValue* val) override
         {
             // Create a new reference wrapper
-            return new RefWrapper<Fighter>();
+            return new RefWrapper<T>();
         }
 
         void Store(CSerializedValue* val, void* ptr) override
         {
-            RefWrapper<Fighter>* ref = static_cast<RefWrapper<Fighter>*>(ptr);
+            RefWrapper<T>* ref = static_cast<RefWrapper<T>*>(ptr);
             asIScriptEngine* engine = val->GetType()->GetEngine();
-            int fighterTypeId = engine->GetTypeIdByDecl("Fighter");
+            int typeId = engine->GetTypeIdByDecl(m_typeDecl.c_str());
 
-            // Store the inner Fighter data as a child
-            val->m_children.push_back(new CSerializedValue(val, "data", "", &ref->data(), fighterTypeId));
+            // Store the inner data as a child
+            val->m_children.push_back(new CSerializedValue(val, "data", "", &ref->data(), typeId));
         }
 
         void Restore(CSerializedValue* val, void* ptr) override
         {
-            RefWrapper<Fighter>* ref = static_cast<RefWrapper<Fighter>*>(ptr);
+            RefWrapper<T>* ref = static_cast<RefWrapper<T>*>(ptr);
             asIScriptEngine* engine = val->GetType()->GetEngine();
-            int fighterTypeId = engine->GetTypeIdByDecl("Fighter");
+            int typeId = engine->GetTypeIdByDecl(m_typeDecl.c_str());
 
-            val->m_children[0]->Restore(&ref->data(), fighterTypeId);
+            val->m_children[0]->Restore(&ref->data(), typeId);
         }
+
+    private:
+        std::string m_typeDecl{};
     };
 
     // Static instances to ensure they live for the duration of the application
     Serializer_Array g_serializerArray;
     Serializer_String g_serializerString;
     Serializer_Fighter g_serializerFighter;
-    Serializer_FighterRef g_serializerFighterRef;
+    Serializer_RefWrapper<Fighter> g_serializerFighterRef{"Fighter"};
 }
 
 namespace MyProject
