@@ -150,21 +150,15 @@ namespace
     private:
         std::string m_typeDecl{};
     };
-
-    // Static instances to ensure they live for the duration of the application
-    Serializer_Array g_serializerArray;
-    Serializer_String g_serializerString;
-    Serializer_Fighter g_serializerFighter;
-    Serializer_RefWrapper<Fighter> g_serializerFighterRef{"Fighter"};
 }
 
 namespace MyProject
 {
     void RegisterScriptSerializer(CSerializer& serializer)
     {
-        serializer.AddUserType(&g_serializerArray, "array");
-        serializer.AddUserType(&g_serializerString, "string");
-        serializer.AddUserType(&g_serializerFighter, "Fighter");
-        serializer.AddUserType(&g_serializerFighterRef, "FighterRef");
+        serializer.AddUserType(new Serializer_Array(), "array");
+        serializer.AddUserType(new Serializer_String(), "string");
+        serializer.AddUserType(new Serializer_Fighter(), "Fighter");
+        serializer.AddUserType(new Serializer_RefWrapper<Fighter>("Fighter"), "FighterRef");
     }
 }
